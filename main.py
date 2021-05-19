@@ -1,12 +1,12 @@
 
 # libs
 import discord
-import random, re, sys
+import secrets, re, sys
 
 # globals
 PREFIX = r"!"
-TOKEN = str(open("../TOKEN", "r").readlines()[0].strip("\n"))
-INVITE = "https://discordapp.com/oauth2/authorize?client_id=844685330241159170&permissions=8&scope=bot"
+TOKEN = str(open(r"../TOKEN", "r").readlines()[0].strip("\n"))
+INVITE = r"https://discordapp.com/oauth2/authorize?client_id=844685330241159170&permissions=8&scope=bot"
 
 # colors
 BLUE = 0x023059
@@ -31,7 +31,7 @@ class MyClient(discord.Client):
 				faces = int(msg.split("d")[1].split("*")[0])
 				factor = int(msg.split("d")[1].split("*")[1])
 				# generate dice roll and result
-				roll = [ random.randint(1, faces) for _ in range(count) ]
+				roll = [ secrets.randbelow(faces + 1) for _ in range(count) ]
 				result = sum(roll) * factor
 				# create embed
 				embed = discord.Embed(title="Alea iacta est", color=BLUE)
@@ -40,12 +40,12 @@ class MyClient(discord.Client):
 				embed.add_field(name="Result", value=f"`{result}`", inline=False)
 				await message.channel.send(embed=embed)
 			
-			# info command
-			elif re.search(rf"{PREFIX}info", message.content):
+			# info and help command
+			elif re.search(rf"{PREFIX}(info|help)", message.content):
 				# create embed
 				embed = discord.Embed(title="Info", color=BLUE)
 				embed.set_thumbnail(url=str(client.user.avatar_url))
-				embed.add_field(name="Usage", value=f"`{PREFIX}roll 2d6*3` can return for example `Roll: [4, 5]` and `Result: 27`", inline=False)
+				embed.add_field(name="Usage", value=f"`{PREFIX}roll [count]d[faces]*[factor]`", inline=False)
 				embed.add_field(name="GitHub", value=r"https://github.com/InformaticFreak/QuantumDice", inline=False)
 				embed.add_field(name="Invite", value=INVITE, inline=False)
 				await message.channel.send(embed=embed)
