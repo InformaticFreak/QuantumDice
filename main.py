@@ -1,7 +1,8 @@
 
 # libs
 import discord
-import secrets, re, sys
+import secrets, re
+import time, datetime, logging
 
 # globals
 PREFIX = r"!"
@@ -11,6 +12,10 @@ INVITE = r"https://discordapp.com/oauth2/authorize?client_id=844685330241159170&
 # colors
 BLUE = 0x023059
 GOLD = 0xf2c84b
+
+# logging
+logging.basicConfig(filename=r"dice_rolls.log")
+logging.info("timestamp;message;user;result;roll")
 
 # client
 class MyClient(discord.Client):
@@ -33,11 +38,13 @@ class MyClient(discord.Client):
 				# generate dice roll and result
 				roll = [ secrets.randbelow(faces + 1) for _ in range(count) ]
 				result = sum(roll) * factor
+				# log dice roll
+				logging.info(f"{str(datetime.datetime.fromtimestamp(int(time.time())))};{message.content};{message.author.name}#{message.author.discriminator};{result};{';'.join(roll)}")
 				# create embed
-				embed = discord.Embed(title="Alea iacta est", color=BLUE)
-				embed.add_field(name="User", value=f"`{message.author.name}#{message.author.discriminator}`", inline=False)
-				embed.add_field(name="Roll", value=f"`{roll}`", inline=False)
-				embed.add_field(name="Result", value=f"`{result}`", inline=False)
+				embed = discord.Embed(title="Alea Iacta Est", color=BLUE)
+				embed.add_field(name="User", value=f"`{message.author.name}#{message.author.discriminator}`")
+				embed.add_field(name="Roll", value=f"`{roll}`")
+				embed.add_field(name="Result", value=f"`{result}`")
 				await message.channel.send(embed=embed)
 			
 			# info and help command
