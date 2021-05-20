@@ -57,8 +57,8 @@ class MyClient(discord.Client):
 				# create embed
 				embed = discord.Embed(title="Info", color=BLUE)
 				embed.set_thumbnail(url=str(client.user.avatar_url))
-				embed.add_field(name="Usage", value=f"`{PREFIX}roll [count]d[faces]*[factor]`", inline=False)
-				embed.add_field(name="RegEx", value=f"```regex\n{PREFIX}roll *[0-9]+ *d *[0-9]+ *(\* *[0-9]+)? *```", inline=False)
+				embed.add_field(name="Usage", value=f"```{PREFIX}roll [count]d[faces]*[factor]```", inline=False)
+				embed.add_field(name="RegEx", value=f"```re\n{PREFIX}roll *[0-9]+ *d *[0-9]+ *(\* *[0-9]+)? *```", inline=False)
 				embed.add_field(name="GitHub", value=r"https://github.com/InformaticFreak/QuantumDice", inline=False)
 				embed.add_field(name="Invite", value=INVITE, inline=False)
 				await message.channel.send(embed=embed)
