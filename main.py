@@ -31,7 +31,7 @@ class MyClient(discord.Client):
 			# roll command
 			if re.search(rf"{PREFIX}roll *[0-9]+ *d *[0-9]+ *(\* *[0-9]+)? *", message.content):
 				# extract dice data
-				msg = f"{message.content.replace(' ', '')[5:]}*1"
+				msg = f"{message.content.replace(' ','')[(len(PREFIX+4):]}*1"
 				count = int(msg.split("d")[0])
 				faces = int(msg.split("d")[1].split("*")[0])
 				factor = int(msg.split("*")[1])
