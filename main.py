@@ -52,15 +52,24 @@ class MyClient(discord.Client):
 				embed.add_field(name="Result", value=f"`{result}`")
 				await message.channel.send(embed=embed)
 			
-			# info and help command
-			elif re.search(rf"{PREFIX}(info|help) *", message.content):
+			# info command
+			elif re.search(rf"{PREFIX}(info) *", message.content):
 				# create embed
 				embed = discord.Embed(title="Info", color=BLUE)
 				embed.set_thumbnail(url=str(client.user.avatar_url))
-				embed.add_field(name="Usage", value=f"```{PREFIX}roll [count]d[faces]*[factor]```", inline=False)
-				embed.add_field(name="RegEx", value=f"```re\n{PREFIX}roll *[0-9]+ *d *[0-9]+ *(\* *[0-9]+)? *```", inline=False)
+				embed.add_field(name="Help", value=f"`{PREFIX}help`", inline=False)
 				embed.add_field(name="GitHub", value=r"https://github.com/InformaticFreak/QuantumDice", inline=False)
 				embed.add_field(name="Invite", value=INVITE, inline=False)
+				await message.channel.send(embed=embed)
+
+			# help command
+			elif re.search(rf"{PREFIX}(help) *", message.content):
+				# create embed
+				embed = discord.Embed(title="Help", color=BLUE)
+				embed.set_thumbnail(url=str(client.user.avatar_url))
+				embed.add_field(name="Roll Dice", value=f"It rolls `count` times a virtual dice with a certain number of `faces`. The sum of all dice rolls is multiplied by the `factor`.\n```{PREFIX}roll [count]d[faces]*[factor]```", inline=False)
+				embed.add_field(name="Help", value=f"It shows this help.\n```{PREFIX}help```", inline=False)
+				embed.add_field(name="Info", value=f"It shows the info.\n```{PREFIX}info```", inline=False)
 				await message.channel.send(embed=embed)
 
 # run
