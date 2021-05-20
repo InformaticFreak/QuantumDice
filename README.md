@@ -12,7 +12,7 @@ As an alternative to IBM, the Built-In Python library [secrets](https://docs.pyt
 
 ## Roll Dice
 
-It rolls `count` times a virtual dice with a certain number of `faces`. The sum of all dice rolls is multiplied by the `factor`.
+It rolls `count` times a virtual dice with a certain number of `faces`. The sum of all dice rolls is multiplied by the optional `factor`.
 
 `!roll [count]d[faces]*[factor]`
 
