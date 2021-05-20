@@ -14,8 +14,7 @@ BLUE = 0x023059
 GOLD = 0xf2c84b
 
 # logging
-logging.basicConfig(filename=r"dice_rolls.log")
-logging.info("timestamp;message;user;result;roll")
+logging.basicConfig(filename=r"dice_rolls.log", level=logging.INFO, format="%(levelname)s;%(asctime)s;%(message)s", datefmt="%m/%d/%Y;%I:%M:%S")
 
 # client
 class MyClient(discord.Client):
@@ -36,10 +35,15 @@ class MyClient(discord.Client):
 				faces = int(msg.split("d")[1].split("*")[0])
 				factor = int(msg.split("d")[1].split("*")[1])
 				# generate dice roll and result
-				roll = [ secrets.randbelow(faces + 1) for _ in range(count) ]
+				roll = [ secrets.randbelow(faces)+1 for _ in range(count) ]
 				result = sum(roll) * factor
 				# log dice roll
-				logging.info(f"{str(datetime.datetime.fromtimestamp(int(time.time())))};{message.content};{message.author.name}#{message.author.discriminator};{result};{';'.join(roll)}")
+				logging.info("{message};{author};{result};{roll}".format(
+					message=message.content.replace(r"\n", r"\\n"),
+					author=f"{message.author.name}#{message.author.discriminator}",
+					result=result,
+					roll=";".join([ str(num) for num in roll ]))
+				)
 				# create embed
 				embed = discord.Embed(title="Alea Iacta Est", color=BLUE)
 				embed.add_field(name="User", value=f"`{message.author.name}#{message.author.discriminator}`")
