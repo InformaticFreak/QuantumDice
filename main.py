@@ -53,7 +53,7 @@ class MyClient(discord.Client):
 				await message.channel.send(embed=embed)
 			
 			# info and help command
-			elif re.search(rf"{PREFIX}(info|help)", message.content):
+			elif re.search(rf"{PREFIX}(info|help) *", message.content):
 				# create embed
 				embed = discord.Embed(title="Info", color=BLUE)
 				embed.set_thumbnail(url=str(client.user.avatar_url))
