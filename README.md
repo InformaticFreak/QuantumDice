@@ -2,13 +2,17 @@
 
 [![CodeFactor](https://www.codefactor.io/repository/github/informaticfreak/quantumdice/badge)](https://www.codefactor.io/repository/github/informaticfreak/quantumdice)&nbsp;
 
+It rolls a virtual dice with any number of faces. For this purpose, the secrets module is used to generate cryptographically strong random numbers.
+
+## Why is no real quantum computer used?
+
 *Unfortunately without IBM Quantum API after all, because up to 7 minutes waiting time in the job queue!!!*
 
 As an alternative to IBM, the Built-In Python library [secrets](https://docs.python.org/3/library/secrets.html) is used:
 
 "*The [secrets](https://docs.python.org/3/library/secrets.html) module is used for generating cryptographically strong random numbers suitable for managing data such as passwords, account authentication, security tokens, and related secrets.*"
 
-[Invite this bot](https://discordapp.com/oauth2/authorize?client_id=844685330241159170&permissions=8&scope=bot)
+## [Invite this bot](https://discordapp.com/oauth2/authorize?client_id=844685330241159170&permissions=8&scope=bot)
 
 # Commands
 
