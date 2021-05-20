@@ -1,8 +1,7 @@
 
 # libs
 import discord
-import secrets, re
-import time, datetime, logging
+import secrets, re, time, datetime, logging
 
 # globals
 PREFIX = r"!"
