@@ -19,21 +19,22 @@ logging.basicConfig(filename=r"dice_rolls.log", level=logging.INFO, format="%(le
 # client
 class MyClient(discord.Client):
 	
-	# logged in
+	# ready
 	async def on_ready(self):
-		print("logged in")
+		logging.info("ready")
+		print("ready")
 	
 	# recognize command
 	async def on_message(self, message):
 		if message.author != client.user and message.content.startswith(PREFIX):
 			
 			# roll command
-			if re.search(rf"{PREFIX}roll +[0-9]+d[0-9]+(\*[0-9]+)?", message.content):
+			if re.search(rf"{PREFIX}roll *[0-9]+ *d *[0-9]+ *(\* *[0-9]+)? *", message.content):
 				# extract dice data
-				msg = f"{message.content}*1"
-				count = int(msg.split("d")[0].split(" ")[1])
+				msg = f"{message.content.replace(' ', '')[5:]}*1"
+				count = int(msg.split("d")[0])
 				faces = int(msg.split("d")[1].split("*")[0])
-				factor = int(msg.split("d")[1].split("*")[1])
+				factor = int(msg.split("*")[1])
 				# generate dice roll and result
 				roll = [ secrets.randbelow(faces)+1 for _ in range(count) ]
 				result = sum(roll) * factor
@@ -57,6 +58,7 @@ class MyClient(discord.Client):
 				embed = discord.Embed(title="Info", color=BLUE)
 				embed.set_thumbnail(url=str(client.user.avatar_url))
 				embed.add_field(name="Usage", value=f"`{PREFIX}roll [count]d[faces]*[factor]`", inline=False)
+				embed.add_field(name="RegEx", value=f"```regex\n{PREFIX}roll *[0-9]+ *d *[0-9]+ *(\* *[0-9]+)? *```", inline=False)
 				embed.add_field(name="GitHub", value=r"https://github.com/InformaticFreak/QuantumDice", inline=False)
 				embed.add_field(name="Invite", value=INVITE, inline=False)
 				await message.channel.send(embed=embed)
