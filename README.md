@@ -1,5 +1,7 @@
 # QuantumDice Discord Bot
 
+[![GitHub License](https://img.shields.io/badge/license-MIT-green)](LICENSE.txt)&nbsp;
+[![Python Version](https://img.shields.io/badge/python-3-blue)](https://www.python.org/downloads/)&nbsp;
 [![CodeFactor](https://www.codefactor.io/repository/github/informaticfreak/quantumdice/badge)](https://www.codefactor.io/repository/github/informaticfreak/quantumdice)&nbsp;
 
 It rolls a virtual dice with any number of faces. For this purpose, the secrets module is used to generate cryptographically strong random numbers.
