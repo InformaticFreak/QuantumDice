@@ -1,5 +1,7 @@
 # QuantumDice Discord Bot
 
+[![CodeFactor](https://www.codefactor.io/repository/github/informaticfreak/quantumdice/badge)](https://www.codefactor.io/repository/github/informaticfreak/quantumdice)&nbsp;
+
 *Unfortunately without IBM Quantum API after all, because up to 7 minutes waiting time in the job queue!!!*
 
 As an alternative to IBM, the Built-In Python library [secrets](https://docs.python.org/3/library/secrets.html) is used:
