@@ -39,7 +39,7 @@ class MyClient(discord.Client):
 				result = sum(roll) * factor
 				# log dice roll
 				logging.info("{message};{author};{result};{roll}".format(
-					message=message.content.replace(r"\n", r"\\n"),
+					message=message.content.replace("\\", "\\\\"),
 					author=f"{message.author.name}#{message.author.discriminator}",
 					result=result,
 					roll=";".join([ str(num) for num in roll ]))
