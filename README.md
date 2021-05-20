@@ -1,6 +1,6 @@
 # QuantumDice Discord Bot
 
-*So far without IBM Quantum API, because of up to 7 minutes waiting time in the job queue!!!*
+*Unfortunately without IBM Quantum API after all, because up to 7 minutes waiting time in the job queue!!!*
 
 As an alternative to IBM, the Built-In Python library [secrets](https://docs.python.org/3/library/secrets.html) is used:
 
