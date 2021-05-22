@@ -5,7 +5,7 @@
 [![Python Version](https://img.shields.io/badge/python-3-blue)](https://www.python.org/downloads/)&nbsp;
 [![CodeFactor](https://www.codefactor.io/repository/github/informaticfreak/quantumdice/badge)](https://www.codefactor.io/repository/github/informaticfreak/quantumdice)&nbsp;
 
-It rolls a virtual dice with any number of faces. For this purpose, the IBM Quantum API via [qRNG](https://github.com/ozaner/qRNG) and the secrets module is used.
+It rolls a virtual dice with any number of faces. For this purpose, the [IBM Quantum API](https://quantum-computing.ibm.com/) via [qRNG](https://github.com/ozaner/qRNG) and the [secrets module](https://docs.python.org/3/library/secrets.html) is used.
 
 *Invite this bot [here](https://discordapp.com/oauth2/authorize?client_id=844685330241159170&permissions=8&scope=bot)*
 
