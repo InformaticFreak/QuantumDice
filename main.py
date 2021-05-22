@@ -1,16 +1,22 @@
 
 # libs
 import discord
-import secrets, re, time, datetime, logging
+import re, time, datetime, logging
+import secrets, qrng
 
 # globals
-PREFIX = r"!"
-TOKEN = str(open(r"../TOKEN", "r").readlines()[0].strip("\n"))
-INVITE = r"https://discordapp.com/oauth2/authorize?client_id=844685330241159170&permissions=8&scope=bot"
+PREFIX = r"-"
+TOKEN_DC = str(open(r"../TOKEN_DC", "r").readlines()[0].strip("\n"))
+TOKEN_IBM = str(open(r"../TOKEN_IBM", "r").readlines()[0].strip("\n"))
+INVITE = r"https://discordapp.com/oauth2/authorize?client_id=844685330241159170&permissions=257088&scope=bot"
 
 # colors
 BLUE = 0x023059
 GOLD = 0xf2c84b
+
+# setup ibm qpc
+qrng.set_provider_as_IBMQ(TOKEN_IBM)
+qrng.set_backend()
 
 # logging
 logging.basicConfig(filename=r"dice_rolls.log", level=logging.INFO, format="%(levelname)s;%(asctime)s;%(message)s", datefmt="%m/%d/%Y;%I:%M:%S")
@@ -28,14 +34,25 @@ class MyClient(discord.Client):
 		if message.author != client.user and message.content.startswith(PREFIX):
 			
 			# roll command
-			if re.search(rf"{PREFIX}roll *[0-9]+ *d *[0-9]+ *(\* *[0-9]+)? *", message.content):
+			if re.search(rf"{PREFIX}q?roll *[0-9]+ *d *[0-9]+ *(\* *[0-9]+)? *", message.content):
+				# extract mode
+				msg = message.content.replace(" ", "")
+				if message.content[len(PREFIX)+1] == "q":
+					quantum_mode = True
+					msg += f"{message.content[len(PREFIX)+5:]}*1"
+				else:
+					quantum_mode = False
+					msg += f"{message.content[len(PREFIX)+4:]}*1"
 				# extract dice data
-				msg = f"{message.content.replace(' ','')[len(PREFIX)+4:]}*1"
 				count = int(msg.split("d")[0])
 				faces = int(msg.split("d")[1].split("*")[0])
 				factor = int(msg.split("*")[1])
-				# generate dice roll and result
-				roll = [ secrets.randbelow(faces)+1 for _ in range(count) ]
+				# generate dice roll
+				if quantum_mode:
+					roll = [ round(qrng.get_random_double(1,faces)) for _ in range(count) ]
+				else:
+					roll = [ secrets.randbelow(faces)+1 for _ in range(count) ]
+				# get result
 				result = sum(roll) * factor
 				# log dice roll
 				logging.info("{message};{author};{result};{roll}".format(
@@ -66,11 +83,11 @@ class MyClient(discord.Client):
 				# create embed
 				embed = discord.Embed(title="Help", color=BLUE)
 				embed.set_thumbnail(url=str(client.user.avatar_url))
-				embed.add_field(name="Roll Dice", value=f"It rolls `count` times a virtual dice with a certain number of `faces`. The sum of all dice rolls is multiplied by the optional `factor`.\n```{PREFIX}roll [count]d[faces]*[factor]```", inline=False)
+				embed.add_field(name="Roll Dice", value=f"It rolls `count` times a virtual dice with a certain number of `faces`. The sum of all dice rolls is multiplied by the optional `factor`.\n```{PREFIX}roll [count]d[faces]*[factor]```\nQuantum random numbers are used with `qroll` instead of `roll`.", inline=False)
 				embed.add_field(name="Help", value=f"It shows this help.\n```{PREFIX}help```", inline=False)
 				embed.add_field(name="Info", value=f"It shows the info.\n```{PREFIX}info```", inline=False)
 				await message.channel.send(embed=embed)
 
 # run
 client = MyClient()
-client.run(TOKEN)
+client.run(TOKEN_DC)
