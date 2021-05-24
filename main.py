@@ -18,15 +18,11 @@ GOLD = 0xf2c84b
 qrng.set_provider_as_IBMQ(TOKEN_IBM)
 qrng.set_backend()
 
-# logging
-logging.basicConfig(filename=r"dice_rolls.log", level=logging.INFO, format="%(levelname)s;%(asctime)s;%(message)s", datefmt="%m/%d/%Y;%I:%M:%S")
-
 # client
 class MyClient(discord.Client):
 	
 	# ready
 	async def on_ready(self):
-		logging.info("ready")
 		print("ready")
 	
 	# recognize command
@@ -39,10 +35,10 @@ class MyClient(discord.Client):
 				msg = message.content.replace(" ", "")
 				if message.content[len(PREFIX)] == "q":
 					quantum_mode = True
-					msg += f"{msg[len(PREFIX)+5:]}*1"
+					msg = msg.replace("q", "")
 				else:
 					quantum_mode = False
-					msg += f"{msg[len(PREFIX)+4:]}*1"
+				msg = f"{msg[len(PREFIX)+4:]}*1"
 				# extract dice data
 				count = int(msg.split("d")[0])
 				faces = int(msg.split("d")[1].split("*")[0])
@@ -54,15 +50,11 @@ class MyClient(discord.Client):
 					roll = [ secrets.randbelow(faces)+1 for _ in range(count) ]
 				# get result
 				result = sum(roll) * factor
-				# log dice roll
-				logging.info("{message};{author};{result};{roll}".format(
-					message=message.content.replace("\\", "\\\\"),
-					author=f"{message.author.name}#{message.author.discriminator}",
-					result=result,
-					roll=";".join([ str(num) for num in roll ]))
-				)
 				# create embed
-				embed = discord.Embed(title="Alea Iacta Est", color=BLUE)
+				if quantum_mode:
+					embed = discord.Embed(title="Quantum Iacta Est", color=GOLD)
+				else:
+					embed = discord.Embed(title="Alea Iacta Est", color=BLUE)
 				embed.add_field(name="User", value=f"`{message.author.name}#{message.author.discriminator}`")
 				embed.add_field(name="Roll", value=f"`{roll}`")
 				embed.add_field(name="Result", value=f"`{result}`")
