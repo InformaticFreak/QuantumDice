@@ -37,12 +37,12 @@ class MyClient(discord.Client):
 			if re.search(rf"{PREFIX}q?roll *[0-9]+ *d *[0-9]+ *(\* *[0-9]+)? *", message.content):
 				# extract mode
 				msg = message.content.replace(" ", "")
-				if message.content[len(PREFIX)+1] == "q":
+				if message.content[len(PREFIX)] == "q":
 					quantum_mode = True
-					msg += f"{message.content[len(PREFIX)+5:]}*1"
+					msg += f"{msg[len(PREFIX)+5:]}*1"
 				else:
 					quantum_mode = False
-					msg += f"{message.content[len(PREFIX)+4:]}*1"
+					msg += f"{msg[len(PREFIX)+4:]}*1"
 				# extract dice data
 				count = int(msg.split("d")[0])
 				faces = int(msg.split("d")[1].split("*")[0])
