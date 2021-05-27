@@ -13,16 +13,18 @@ It rolls a virtual dice with any number of faces. For this purpose, the [IBM Qua
 
 ## Roll Dice
 
-It rolls `count` times a virtual dice with a certain number of `faces`. The sum of all dice rolls is multiplied by the optional `factor`.
+It rolls `count` times a virtual dice with a certain number of `faces`. The sum of all dice rolls is multiplied by the optional `factor`. The optional `mode` can be *min*, *max* or *normal* (default mode). The mode *min* returns only the lowest roll and *max* only the highest roll.
 
-`-roll [count]d[faces]*[factor]`
+`-roll [count]d[faces]*[factor] [mode]`
 
 Use `-qroll` to generate random integers with the IBM quantum computer and `-roll` to use the secrets module.
 
-Both modes return for example:
+Some examples:
 
 * `-roll 2d6` -> Roll: `[5, 3]` Result: `8`
 * `-roll 3d10*4` -> Roll: `[4, 8, 5]` Result: `68`
+* `-qroll 2d40*3 min` -> Min Roll: `2` Result: `6`
+* `-roll 3d20 max` -> Max Roll: `17` Result: `17`
 
 ## Help
 
