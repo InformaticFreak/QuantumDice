@@ -31,7 +31,7 @@ class MyClient(discord.Client):
 			print(message.content.strip())
 			
 			# roll command
-			if re.search(rf"{PREFIX}q?roll [0-9]+d[0-9]+(\*[0-9]+)?( (\-min|\-max|-normal)?)? *", message.content):
+			if re.search(rf"{PREFIX}q?roll [0-9]+d[0-9]+(\*[0-9]+)?( (min|max|normal)?)? *", message.content):
 				msg = message.content.split()
 				# extract quantum mode
 				mode_quantum = False
@@ -43,8 +43,8 @@ class MyClient(discord.Client):
 				faces = int(msg[1].split("d")[1].split("*")[0])
 				factor = int(msg[1].split("*")[1])
 				# extract min/max mode
-				msg.append("-normal")
-				mode_min_max = str(msg[2].strip("-"))
+				msg.append("normal")
+				mode_min_max = str(msg[2])
 				# generate dice roll
 				if mode_quantum:
 					roll = [ round(qrng.get_random_double(1,faces)) for _ in range(count) ]
