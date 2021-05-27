@@ -13,7 +13,7 @@ It rolls a virtual dice with any number of faces. For this purpose, the [IBM Qua
 
 ## Roll Dice
 
-It rolls `count` times a virtual dice with a certain number of `faces`. The sum of all dice rolls is multiplied by the optional `factor`. The optional `mode` can be *min*, *max* or *normal* (default mode). The mode *min* returns only the lowest roll and *max* only the highest roll.
+It rolls `count` times a virtual dice with a certain number of `faces`. The sum of all dice rolls is multiplied by the optional `factor`. The optional `mode` can be *min* or *max*. The mode *min* returns only the lowest roll and *max* only the highest roll.
 
 `-roll [count]d[faces]*[factor] [mode]`
 
