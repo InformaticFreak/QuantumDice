@@ -28,7 +28,7 @@ class MyClient(discord.Client):
 	# recognize command
 	async def on_message(self, message):
 		if message.author != client.user and message.content.startswith(PREFIX):
-			print(message.content.strip())
+			#print(message.content.strip())
 			
 			# roll command
 			if re.search(rf"{PREFIX}q?roll [0-9]+d[0-9]+(\*[0-9]+)?( (min|max|normal)?)? *", message.content):
