@@ -72,7 +72,7 @@ class MyClient(discord.Client):
 			# info command
 			elif re.search(rf"{PREFIX}(info) *", message.content):
 				# create embed
-				embed = discord.Embed(title="Info", color=BLUE)
+				embed = discord.Embed(title="Info", url="https://github.com/InformaticFreak/QuantumDice", color=BLUE)
 				embed.set_thumbnail(url=str(client.user.avatar_url))
 				embed.add_field(name="Help", value=f"`{PREFIX}help`", inline=False)
 				embed.add_field(name="GitHub", value=r"https://github.com/InformaticFreak/QuantumDice", inline=False)
@@ -82,7 +82,7 @@ class MyClient(discord.Client):
 			# help command
 			elif re.search(rf"{PREFIX}(help) *", message.content):
 				# create embed
-				embed = discord.Embed(title="Help", color=BLUE)
+				embed = discord.Embed(title="Help", url="https://github.com/InformaticFreak/QuantumDice", color=BLUE)
 				embed.set_thumbnail(url=str(client.user.avatar_url))
 				embed.add_field(name="Roll Dice", value=f"It rolls `count` times a virtual dice with a certain number of `faces`. The sum of all dice rolls is multiplied by the optional `factor`.\n```{PREFIX}roll [count]d[faces]*[factor]```\nQuantum random numbers are used with `qroll` instead of `roll`.", inline=False)
 				embed.add_field(name="Help", value=f"It shows this help.\n```{PREFIX}help```", inline=False)
