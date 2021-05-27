@@ -6,8 +6,8 @@ import qrng, secrets
 
 # globals
 PREFIX = r"-"
-TOKEN_DC = str(open(r"../TOKEN_DC", "r").readlines()[0].strip("\n"))
-TOKEN_IBM = str(open(r"../TOKEN_IBM", "r").readlines()[0].strip("\n"))
+TOKEN_DC = str(open(r"../TOKEN_DC", "r").readlines()[0].strip())
+TOKEN_IBM = str(open(r"../TOKEN_IBM", "r").readlines()[0].strip())
 INVITE = r"https://discordapp.com/oauth2/authorize?client_id=844685330241159170&permissions=257088&scope=bot"
 
 # colors
