@@ -1,13 +1,13 @@
 
 # libs
 import discord
-import re
+import re, os
 import qrng, secrets
 
 # globals
 PREFIX = r"-"
-TOKEN_DC = str(open(r"../TOKEN_DC", "r").readlines()[0].strip())
-TOKEN_IBM = str(open(r"../TOKEN_IBM", "r").readlines()[0].strip())
+TOKEN_DC = open(os.path.abspath(r"../TOKEN_DC"), "r").readlines()[0].strip()
+TOKEN_IBM = open(os.path.abspath(r"../TOKEN_IBM"), "r").readlines()[0].strip()
 INVITE = r"https://discordapp.com/oauth2/authorize?client_id=844685330241159170&permissions=257088&scope=bot"
 
 # colors
@@ -28,7 +28,6 @@ class MyClient(discord.Client):
 	# recognize command
 	async def on_message(self, message):
 		if message.author != client.user and message.content.startswith(PREFIX):
-			#print(message.content.strip())
 			
 			# roll command
 			if re.search(rf"{PREFIX}q?roll [0-9]+d[0-9]+(\*[0-9]+)?( (min|max|normal)?)? *", message.content):
