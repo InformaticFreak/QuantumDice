@@ -3,6 +3,7 @@
 
 [![GitHub License](https://img.shields.io/badge/license-MIT-green)](LICENSE.txt)&nbsp;
 [![Python Version](https://img.shields.io/badge/python-3-blue)](https://www.python.org/downloads/)&nbsp;
+[![Last Release](https://img.shields.io/badge/last%20release-v2021.1-blue)](https://github.com/InformaticFreak/QuantumDice/releases/tag/2021.1)&nbsp;
 [![CodeFactor](https://www.codefactor.io/repository/github/informaticfreak/quantumdice/badge)](https://www.codefactor.io/repository/github/informaticfreak/quantumdice)&nbsp;
 
 It rolls a virtual dice with any number of faces. For this purpose, the [IBM Quantum API](https://quantum-computing.ibm.com/) via [qRNG](https://github.com/ozaner/qRNG) and the [secrets module](https://docs.python.org/3/library/secrets.html) is used.
